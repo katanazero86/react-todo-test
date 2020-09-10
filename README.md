@@ -1,3 +1,28 @@
+# react-todo-test
+
+---
+
+> ### todo app 소개 <br/>
+> React.js, Redux, Reselect, Styled-components, Prop-types, Moment.js, Webpack, Babel, HTML5, CSS3
+> - TODO 등록, TODO 완료, TODO 내용 변경, TODO 모두 완료, TODO 삭제, TODO 상태에 따른 필터링 등이 구현되어있습니다.
+
+---
+
+> ### project 정보 <br/>
+> - create-react-app 을 이용하여 프로젝트 생성
+> - 추가 모듈 설치 및 구성
+> ```
+> npm i --save redux react-redux reselect styled-components prop-types moment moment-timezone
+> npm i --save-dev node-sass
+> ```
+> - 프로젝트 실행방법(execution)
+> ```
+> node moudle install : npm i or npm install
+> dev : npm run start
+> build : npm run build
+> ```
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
