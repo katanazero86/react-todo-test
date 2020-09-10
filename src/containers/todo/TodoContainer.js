@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef, useCallback} from "react";
 import './TodoContainer.css';
 import moment from "moment-timezone";
 import {useSelector, useDispatch} from "react-redux";
@@ -15,7 +15,7 @@ import {
     additionAction,
     allCompleteAction, changeFilterAction, clearCompleteAction,
     completeAction, deleteAction, editingAction,
-    incompleteAction, modifiedAction, TODO_MODIFIED,
+    incompleteAction, modifiedAction,
     toggleAllCheckedAction
 } from "../../store/modules/todo";
 
@@ -29,7 +29,8 @@ export default function TodoContainer() {
     const editItem = useSelector(memoizationEditItemSelector);
 
     const [todoText, setTodoText] = useState('');
-    const [editItemText, setEditItemText] = useState( '');
+    const [editItemText, setEditItemText] = useState('');
+    const inputTextRef = useRef();
 
     const dispatchTodoAddition = () => {
         const todoItem = {
@@ -60,6 +61,16 @@ export default function TodoContainer() {
             dispatch(toggleAllCheckedAction());
         }
     };
+
+    const dispatchChangeFilterAll = useCallback(() => {
+        dispatchChangeFilter('all')
+    }, []);
+    const dispatchChangeFilterActive = useCallback(() => {
+        dispatchChangeFilter('active')
+    }, []);
+    const dispatchChangeFilterComplete = useCallback(() => {
+        dispatchChangeFilter('complete')
+    }, []);
 
     const dispatchChangeFilter = (type) => {
 
@@ -110,7 +121,10 @@ export default function TodoContainer() {
 
     useEffect(() => {
         setEditItemText(editItem ? editItem.description : '');
-    },[editItem]);
+        if (editItem.hasOwnProperty('description')) {
+            inputTextRef.current.focus();
+        }
+    }, [editItem]);
 
     return (
         <div className="todo-wrap">
@@ -138,7 +152,8 @@ export default function TodoContainer() {
                                 <div className="todo-item edit-item dflex align-item-center" key={index}>
                                     <InputText value={editItemText || ''} isInset={true}
                                                onChange={value => setEditItemText(value)}
-                                               onKeyUp={dispatchTodoModified}/>
+                                               onKeyUp={dispatchTodoModified}
+                                               inputTextRef={inputTextRef}/>
                                 </div>)}
 
                             <div className="todo-items-action-wrap">
@@ -150,11 +165,11 @@ export default function TodoContainer() {
                                     </div>
                                     <div className="col-8 dflex justify-content-center">
                                         <Button text="All" isActive={actionFilter.all} isInline={true}
-                                                onClick={() => dispatchChangeFilter('all')}/>
+                                                onClick={dispatchChangeFilterAll}/>
                                         <Button text="Active" isActive={actionFilter.active} isInline={true}
-                                                onClick={() => dispatchChangeFilter('active')}/>
+                                                onClick={dispatchChangeFilterActive}/>
                                         <Button text="Complete" isActive={actionFilter.complete} isInline={true}
-                                                onClick={() => dispatchChangeFilter('complete')}/>
+                                                onClick={dispatchChangeFilterComplete}/>
                                     </div>
                                     <div className="col-2">
                                         <Button text="Clear complete" onClick={dispatchClearComplete}/>

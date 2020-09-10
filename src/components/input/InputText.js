@@ -50,7 +50,7 @@ const StyledCheckIconSvgWrap = styled.div`
     }
 `;
 
-function InputText({value, onChange, onKeyUp, placeholder, isIcon, checked, onClick, isInset}) {
+function InputText({value, onChange, onKeyUp, placeholder, isIcon, checked, onClick, isInset, inputTextRef}) {
 
     const onChangeInputText = (e) => {
         onChange(e.target.value);
@@ -65,7 +65,7 @@ function InputText({value, onChange, onKeyUp, placeholder, isIcon, checked, onCl
     return (
         <StyledInputTextWrap isIcon={isIcon} isInset={isInset}>
             {isIcon && <StyledCheckIconSvgWrap onClick={onClick}><CheckIconSvgComponent fill={checked ? `#6e6e6e` : `#dedede` } /> </StyledCheckIconSvgWrap>}
-            <input type="text" value={value} onChange={onChangeInputText} placeholder={placeholder} onKeyUp={onKeyUpInputText}/>
+            <input type="text" value={value} onChange={onChangeInputText} placeholder={placeholder} onKeyUp={onKeyUpInputText} ref={inputTextRef}/>
         </StyledInputTextWrap>
     )
 }
