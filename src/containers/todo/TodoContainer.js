@@ -16,11 +16,10 @@ import {
 import moment from "moment-timezone";
 
 // components
-import RoundCheckbox from "../../components/checkbox/RoundCheckbox";
 import InputText from "../../components/input/InputText";
-import Button from "../../components/button/Button";
 import TodoHeader from "../../components/todo/TodoHeader";
 import TodoAction from "../../components/todo/TodoAction";
+import TodoItem from "../../components/todo/TodoItem";
 
 
 export default function TodoContainer() {
@@ -38,6 +37,7 @@ export default function TodoContainer() {
 
     const dispatchTodoAddition = () => {
         const todoItem = {
+            id : Math.random().toString(36).substr(2, 16),
             description: todoText,
             isComplete: false,
             isEditing: false,
@@ -46,11 +46,11 @@ export default function TodoContainer() {
         dispatch(additionAction(todoItem));
     };
 
-    const dispatchTodoCompleteToggle = (checked, indexValue) => {
+    const dispatchTodoCompleteToggle = (checked, targetId) => {
         if (checked) {
-            dispatch(completeAction(indexValue));
+            dispatch(completeAction(targetId));
         } else {
-            dispatch(incompleteAction(indexValue));
+            dispatch(incompleteAction(targetId));
         }
     };
 
@@ -93,12 +93,12 @@ export default function TodoContainer() {
         dispatch(clearCompleteAction());
     }, []);
 
-    const dispatchTodoDelete = (indexValue) => {
-        dispatch(deleteAction(indexValue));
+    const dispatchTodoDelete = (targetId) => {
+        dispatch(deleteAction(targetId));
     };
 
-    const dispatchEnableEditing = (indexValue) => {
-        dispatch(editingAction(indexValue))
+    const dispatchEnableEditing = (targetId) => {
+        dispatch(editingAction(targetId))
     };
 
     const dispatchTodoModified = () => {
@@ -137,23 +137,30 @@ export default function TodoContainer() {
 
                 <section className="todo-items-wrap">
                     <div className="todo-items-body">
-                        <InputText placeholder="What needs to be done?" isIcon={true}
-                                   onClick={dispatchTodoAllComplete} checked={todoAllChecked} value={todoText}
-                                   onChange={value => setTodoText(value)} onKeyUp={dispatchTodoAddition}/>
+                        <InputText placeholder="What needs to be done?"
+                                   isIcon={true}
+                                   onClick={dispatchTodoAllComplete}
+                                   checked={todoAllChecked}
+                                   value={todoText}
+                                   onChange={value => setTodoText(value)}
+                                   onKeyUp={dispatchTodoAddition}
+                        />
 
                         {todoItemsRender().map((item, index) => !item.isEditing ?
-                            <div className="todo-item dflex align-item-center" key={index}>
-                                <RoundCheckbox checked={item.isComplete} onChange={dispatchTodoCompleteToggle}
-                                               value={index} name={`complete-${index}`}/>
-                                <p onDoubleClick={() => dispatchEnableEditing(index)}
-                                   className={item.isComplete ? `complete-item` : ``}>{item.description}</p>
-                                <Button isInline={true} icon="delete" onClick={() => dispatchTodoDelete(index)}/>
-                            </div> :
-                            <div className="todo-item edit-item dflex align-item-center" key={index}>
-                                <InputText value={editItemText || ''} isInset={true}
+                            <TodoItem key={index}
+                                      item={item}
+                                      onChange={dispatchTodoCompleteToggle}
+                                      onDoubleClick={dispatchEnableEditing}
+                                      onClick={dispatchTodoDelete}
+                            />
+                            :
+                            <div className="edit-item dflex align-item-center" key={index}>
+                                <InputText value={editItemText || ''}
+                                           isInset={true}
                                            onChange={value => setEditItemText(value)}
                                            onKeyUp={dispatchTodoModified}
-                                           inputTextRef={inputTextRef}/>
+                                           inputTextRef={inputTextRef}
+                                />
                             </div>)}
 
                         <TodoAction

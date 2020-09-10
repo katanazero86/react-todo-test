@@ -1,0 +1,15 @@
+.todo-item {
+    background-color: white;
+    padding: 16px;
+    border-top: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+}
+
+.todo-item > p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    padding-left: 16px;
+}

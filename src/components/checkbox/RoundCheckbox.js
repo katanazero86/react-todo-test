@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 RoundCheckbox.propTypes = {
     checked: PropTypes.bool,
     onChange: PropTypes.func,
-    value: PropTypes.number,
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     name: PropTypes.string,
 };
 

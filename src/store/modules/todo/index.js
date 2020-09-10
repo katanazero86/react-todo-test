@@ -13,10 +13,10 @@ export const TODO_MODIFIED = `TODO/MODIFIED`;
 // action creator function
 export const additionAction = todoItem => ({type: TODO_ADDITION, payload: {todoItem}});
 export const allCompleteAction = () => ({type: TODO_ALL_COMPLETE, payload: null});
-export const completeAction = todoItemIndex => ({type: TODO_COMPLETE, payload: {todoItemIndex}});
-export const incompleteAction = todoItemIndex => ({type: TODO_INCOMPLETE, payload: {todoItemIndex}});
-export const deleteAction = todoItemIndex => ({type: TODO_DELETE, payload: {todoItemIndex}});
-export const editingAction = todoItemIndex => ({type: TODO_EDITING, payload: {todoItemIndex}});
+export const completeAction = todoItemId => ({type: TODO_COMPLETE, payload: {todoItemId}});
+export const incompleteAction = todoItemId => ({type: TODO_INCOMPLETE, payload: {todoItemId}});
+export const deleteAction = todoItemId => ({type: TODO_DELETE, payload: {todoItemId}});
+export const editingAction = todoItemId => ({type: TODO_EDITING, payload: {todoItemId}});
 export const modifiedAction = modifiedDescription => ({type: TODO_MODIFIED, payload: {modifiedDescription}});
 export const changeFilterAction = (targetFilter) => ({type: TODO_CHANGE_FILTER, payload: {targetFilter}});
 export const toggleAllCheckedAction = () => ({type: TODO_All_CHECKED_TOGGLE, payload: null});
@@ -26,7 +26,7 @@ export const clearCompleteAction = () => ({type: TODO_CLEAR_COMPLETE, payload: n
 // state
 const initialState = {
     todoItems: [],
-    editItem : {},
+    editItem: {},
     actionFilter: {
         all: true,
         active: false,
@@ -61,40 +61,32 @@ const reducer = (state = initialState, action) => {
             }
 
         case TODO_COMPLETE :
-            todoItemsArray[action.payload.todoItemIndex] = {
-                ...todoItemsArray[action.payload.todoItemIndex],
-                isComplete: true
-            };
+            todoItemsArray.find(item => item.id === action.payload.todoItemId).isComplete = true;
             return {
                 ...state,
                 todoItems: todoItemsArray
             }
 
         case TODO_INCOMPLETE :
-            todoItemsArray[action.payload.todoItemIndex] = {
-                ...todoItemsArray[action.payload.todoItemIndex],
-                isComplete: false
-            };
+            todoItemsArray.find(item => item.id === action.payload.todoItemId).isComplete = false;
             return {
                 ...state,
                 todoItems: todoItemsArray
             }
 
         case TODO_DELETE :
+            const deleteTargetIndex = todoItemsArray.findIndex(item => item.id === action.payload.todoItemId);
             return {
                 ...state,
-                todoItems: todoItemsArray.filter((item, index) => index !== action.payload.todoItemIndex)
+                todoItems: todoItemsArray.filter((item, index) => index !== deleteTargetIndex)
             }
 
         case TODO_EDITING :
-            todoItemsArray[action.payload.todoItemIndex] = {
-                ...todoItemsArray[action.payload.todoItemIndex],
-                isEditing: true
-            };
+            todoItemsArray.find(item => item.id === action.payload.todoItemId).isEditing = true;
             return {
                 ...state,
                 todoItems: todoItemsArray,
-                editItem : {...todoItemsArray[action.payload.todoItemIndex]}
+                editItem: {...todoItemsArray.find(item => item.id === action.payload.todoItemId)}
             }
 
         case TODO_MODIFIED :
@@ -106,7 +98,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 todoItems: todoItemsArray,
-                editItem : {}
+                editItem: {}
             }
 
         case TODO_CHANGE_FILTER :
