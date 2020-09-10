@@ -1,13 +1,115 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+html, body {
+  height: 100%;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+  height: 100%;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.dflex {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.dflex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.col-wrap {
+  min-width: 0;
+}
+
+.col-1 {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 8.33333%;
+}
+
+.col-2 {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 16.66667%;
+}
+
+.col-3 {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 25%;
+}
+
+.col-4 {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 33.33333%;
+}
+
+.col-5 {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 41.66667%;
+}
+
+.col-6 {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 50%;
+}
+
+.col-7 {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 58.33333%;
+}
+
+.col-8 {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 66.66667%;
+}
+
+.col-9 {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 75%;
+}
+
+.col-10 {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 83.33333%;
+}
+
+.col-11 {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 91.66667%;
+}
+
+.col-12 {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 100%;
+}
+
