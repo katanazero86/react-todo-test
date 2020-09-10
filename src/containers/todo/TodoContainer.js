@@ -19,6 +19,8 @@ import moment from "moment-timezone";
 import RoundCheckbox from "../../components/checkbox/RoundCheckbox";
 import InputText from "../../components/input/InputText";
 import Button from "../../components/button/Button";
+import TodoHeader from "../../components/todo/TodoHeader";
+import TodoAction from "../../components/todo/TodoAction";
 
 
 export default function TodoContainer() {
@@ -87,9 +89,9 @@ export default function TodoContainer() {
 
     };
 
-    const dispatchClearComplete = () => {
+    const dispatchClearComplete = useCallback(() => {
         dispatch(clearCompleteAction());
-    };
+    }, []);
 
     const dispatchTodoDelete = (indexValue) => {
         dispatch(deleteAction(indexValue));
@@ -131,13 +133,8 @@ export default function TodoContainer() {
     return (
         <article className="todo-wrap">
             <div className="todo-body">
-                <header className="todo-header-wrap">
-                    <div className="todo-header-body">
-                        <p>
-                            todos
-                        </p>
-                    </div>
-                </header>
+                <TodoHeader title="todos"/>
+
                 <section className="todo-items-wrap">
                     <div className="todo-items-body">
                         <InputText placeholder="What needs to be done?" isIcon={true}
@@ -159,26 +156,15 @@ export default function TodoContainer() {
                                            inputTextRef={inputTextRef}/>
                             </div>)}
 
-                        <section className="todo-items-action-wrap">
-                            <div className="todo-items-action-body dflex">
-                                <div className="col-2 dflex align-item-center">
-                                    <p>
-                                        {todoItemsCounter} items left
-                                    </p>
-                                </div>
-                                <div className="col-8 dflex justify-content-center">
-                                    <Button text="All" isActive={actionFilter.all} isInline={true}
-                                            onClick={dispatchChangeFilterAll}/>
-                                    <Button text="Active" isActive={actionFilter.active} isInline={true}
-                                            onClick={dispatchChangeFilterActive}/>
-                                    <Button text="Complete" isActive={actionFilter.complete} isInline={true}
-                                            onClick={dispatchChangeFilterComplete}/>
-                                </div>
-                                <div className="col-2">
-                                    <Button text="Clear complete" onClick={dispatchClearComplete}/>
-                                </div>
-                            </div>
-                        </section>
+                        <TodoAction
+                            todoItemsCounter={todoItemsCounter}
+                            actionFilter={actionFilter}
+                            dispatchChangeFilterAll={dispatchChangeFilterAll}
+                            dispatchChangeFilterActive={dispatchChangeFilterActive}
+                            dispatchChangeFilterComplete={dispatchChangeFilterComplete}
+                            dispatchClearComplete={dispatchClearComplete}
+                        />
+
                     </div>
                 </section>
             </div>

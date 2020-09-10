@@ -1,0 +1,13 @@
+.todo-items-action-wrap {
+
+}
+
+
+.todo-items-action-body {
+    border: 1px solid #cccccc;
+    padding: 14px;
+    color: #828282;
+    background-color: white;
+    font-size: 15px;
+    font-weight: 400;
+}
