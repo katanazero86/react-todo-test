@@ -129,7 +129,7 @@ export default function TodoContainer() {
     }, [editItem]);
 
     return (
-        <div className="todo-wrap">
+        <article className="todo-wrap">
             <div className="todo-body">
                 <header className="todo-header-wrap">
                     <div className="todo-header-body">
@@ -182,6 +182,6 @@ export default function TodoContainer() {
                     </div>
                 </section>
             </div>
-        </div>
+        </article>
     )
 }
