@@ -1,16 +1,11 @@
 import React, {useState, useEffect, useRef, useCallback} from "react";
 import './TodoContainer.css';
-import moment from "moment-timezone";
 import {useSelector, useDispatch} from "react-redux";
 import {
     memoizationTodoItemsSelector,
     memoizationTodoItemsCounter,
     memoizationActionFilterSelector, memoizationTodoAllCheckedSelector, memoizationEditItemSelector
 } from '../../selector/TodoSelect';
-
-import RoundCheckbox from "../../components/checkbox/RoundCheckbox";
-import InputText from "../../components/input/InputText";
-import Button from "../../components/button/Button";
 import {
     additionAction,
     allCompleteAction, changeFilterAction, clearCompleteAction,
@@ -18,6 +13,13 @@ import {
     incompleteAction, modifiedAction,
     toggleAllCheckedAction
 } from "../../store/modules/todo";
+import moment from "moment-timezone";
+
+// components
+import RoundCheckbox from "../../components/checkbox/RoundCheckbox";
+import InputText from "../../components/input/InputText";
+import Button from "../../components/button/Button";
+
 
 export default function TodoContainer() {
 

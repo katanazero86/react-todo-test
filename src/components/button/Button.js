@@ -1,9 +1,10 @@
 import React from "react";
 import styled from 'styled-components'
 import Proptypes from 'prop-types';
-
 import {ReactComponent as DeleteIconSvgComponent} from '../../assets/icons/delete.svg';
 
+
+// prop-types
 Button.propTypes = {
     text: Proptypes.string,
     onClick: Proptypes.func,
@@ -12,6 +13,7 @@ Button.propTypes = {
     icon: Proptypes.string, // delete,
 };
 
+// styled-component
 const StyledButtonWrap = styled.div`
     ${props => props.isInline ? `display : inline-block;` : `display : block;`};
     margin : 0 8px;

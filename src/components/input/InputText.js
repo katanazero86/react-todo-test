@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { ReactComponent as CheckIconSvgComponent } from '../../assets/icons/check.svg';
 
+// prop-types
 InputText.propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func,
@@ -14,6 +15,7 @@ InputText.propTypes = {
     isInset : PropTypes.bool,
 };
 
+// styled-component
 const StyledInputTextWrap = styled.div`
 
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);

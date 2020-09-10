@@ -2,6 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+// prop-types
 RoundCheckbox.propTypes = {
     checked: PropTypes.bool,
     onChange: PropTypes.func,
@@ -9,6 +10,7 @@ RoundCheckbox.propTypes = {
     name: PropTypes.string,
 };
 
+// styled-component
 const StyledRoundCheckboxWrap = styled.div`
     position: relative;
     
