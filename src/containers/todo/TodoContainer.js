@@ -137,51 +137,50 @@ export default function TodoContainer() {
                             todos
                         </p>
                     </div>
-                    <div className="todo-items-wrap">
-                        <div className="todo-items-body">
-                            <InputText placeholder="What needs to be done?" isIcon={true}
-                                       onClick={dispatchTodoAllComplete} checked={todoAllChecked} value={todoText}
-                                       onChange={value => setTodoText(value)} onKeyUp={dispatchTodoAddition}/>
+                </header>
+                <section className="todo-items-wrap">
+                    <div className="todo-items-body">
+                        <InputText placeholder="What needs to be done?" isIcon={true}
+                                   onClick={dispatchTodoAllComplete} checked={todoAllChecked} value={todoText}
+                                   onChange={value => setTodoText(value)} onKeyUp={dispatchTodoAddition}/>
 
-                            {todoItemsRender().map((item, index) => !item.isEditing ?
-                                <div className="todo-item dflex align-item-center" key={index}>
-                                    <RoundCheckbox checked={item.isComplete} onChange={dispatchTodoCompleteToggle}
-                                                   value={index} name={`complete-${index}`}/>
-                                    <p onDoubleClick={() => dispatchEnableEditing(index)}
-                                       className={item.isComplete ? `complete-item` : ``}>{item.description}</p>
-                                    <Button isInline={true} icon="delete" onClick={() => dispatchTodoDelete(index)}/>
-                                </div> :
-                                <div className="todo-item edit-item dflex align-item-center" key={index}>
-                                    <InputText value={editItemText || ''} isInset={true}
-                                               onChange={value => setEditItemText(value)}
-                                               onKeyUp={dispatchTodoModified}
-                                               inputTextRef={inputTextRef}/>
-                                </div>)}
+                        {todoItemsRender().map((item, index) => !item.isEditing ?
+                            <div className="todo-item dflex align-item-center" key={index}>
+                                <RoundCheckbox checked={item.isComplete} onChange={dispatchTodoCompleteToggle}
+                                               value={index} name={`complete-${index}`}/>
+                                <p onDoubleClick={() => dispatchEnableEditing(index)}
+                                   className={item.isComplete ? `complete-item` : ``}>{item.description}</p>
+                                <Button isInline={true} icon="delete" onClick={() => dispatchTodoDelete(index)}/>
+                            </div> :
+                            <div className="todo-item edit-item dflex align-item-center" key={index}>
+                                <InputText value={editItemText || ''} isInset={true}
+                                           onChange={value => setEditItemText(value)}
+                                           onKeyUp={dispatchTodoModified}
+                                           inputTextRef={inputTextRef}/>
+                            </div>)}
 
-                            <div className="todo-items-action-wrap">
-                                <div className="todo-items-action-body dflex">
-                                    <div className="col-2 dflex align-item-center">
-                                        <p>
-                                            {todoItemsCounter} items left
-                                        </p>
-                                    </div>
-                                    <div className="col-8 dflex justify-content-center">
-                                        <Button text="All" isActive={actionFilter.all} isInline={true}
-                                                onClick={dispatchChangeFilterAll}/>
-                                        <Button text="Active" isActive={actionFilter.active} isInline={true}
-                                                onClick={dispatchChangeFilterActive}/>
-                                        <Button text="Complete" isActive={actionFilter.complete} isInline={true}
-                                                onClick={dispatchChangeFilterComplete}/>
-                                    </div>
-                                    <div className="col-2">
-                                        <Button text="Clear complete" onClick={dispatchClearComplete}/>
-                                    </div>
+                        <section className="todo-items-action-wrap">
+                            <div className="todo-items-action-body dflex">
+                                <div className="col-2 dflex align-item-center">
+                                    <p>
+                                        {todoItemsCounter} items left
+                                    </p>
+                                </div>
+                                <div className="col-8 dflex justify-content-center">
+                                    <Button text="All" isActive={actionFilter.all} isInline={true}
+                                            onClick={dispatchChangeFilterAll}/>
+                                    <Button text="Active" isActive={actionFilter.active} isInline={true}
+                                            onClick={dispatchChangeFilterActive}/>
+                                    <Button text="Complete" isActive={actionFilter.complete} isInline={true}
+                                            onClick={dispatchChangeFilterComplete}/>
+                                </div>
+                                <div className="col-2">
+                                    <Button text="Clear complete" onClick={dispatchClearComplete}/>
                                 </div>
                             </div>
-                        </div>
+                        </section>
                     </div>
-
-                </header>
+                </section>
             </div>
         </div>
     )
