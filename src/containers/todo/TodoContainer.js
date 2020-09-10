@@ -1,6 +1,7 @@
 import React from "react";
 import './TodoContainer.css';
 import PropTypes from 'prop-types';
+import RoundCheckbox from "../../components/checkbox/RoundCheckbox";
 
 TodoContainer.propTypes = {
 
@@ -16,6 +17,7 @@ export default function TodoContainer() {
                             todos
                         </p>
                     </div>
+                    <RoundCheckbox checked={true} onChange={() => console.log('zz')}/>
                 </header>
             </div>
         </div>
